@@ -1,0 +1,11 @@
+@use '../abstracts/colors';
+@use '../abstracts/font_size';
+html,
+body {
+  background-color: colors.$background-primary;
+}
+
+h1 {
+  color: colors.$titles-primary;
+  font-size: clamp(font_size.$title-s, 5vw, font_size.$title-l);
+}
