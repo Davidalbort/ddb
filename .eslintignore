@@ -8,3 +8,5 @@ pre-commit
 tsconfig.json
 README.md
 *.scss
+*.png
+db.json
