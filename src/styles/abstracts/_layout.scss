@@ -1,0 +1,28 @@
+// px-to-rem_scale
+
+$base: 16;
+$_px-24: #{24 / $base}rem;
+$_px-140: #{24 / $base}rem;
+$_px-200: #{200 / $base}rem;
+
+// gaps_scale
+
+/* 
+    l  ---> large
+    m  ---> medium
+    s  ---> small
+    xs ---> tiny
+*/
+
+$gp-m: $_px-24;
+
+// with-heigh_scale
+
+/* 
+    l    ---> large
+    m    ---> medium
+    s    ---> small
+    xs   ---> tiny
+    w-p  ---> width product
+*/
+$max-width-product: $_px-200;

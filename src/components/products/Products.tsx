@@ -1,23 +1,33 @@
 import { ProductsProps } from '@/utils/types'
 import Image from 'next/image'
+import '@/styles/components/products.scss'
 
 export function Products({ products }: ProductsProps) {
   return (
-    <main>
-      <ul>
+    <main className="product">
+      <ul className="product__list">
         {products ? (
           products.map((product) => (
-            <li key={product.id}>
-              <Image
-                src={product.image}
-                alt={`Image ${product.name}`}
-                width={300}
-                height={200}
-              />
-              <h2>{product.name}</h2>
-              <p role="definition">{product.description}</p>
-              <span role="textbox">{product.price.toFixed(3)}</span>
-              <button>ADD</button>
+            <li className="product__item product--hover" key={product.id}>
+              <article className="product__container">
+                <figure className="container-image">
+                  <Image
+                    className="product__image product__image--zoom"
+                    src={product.image}
+                    alt={`Image ${product.name}`}
+                    width={150}
+                    height={200}
+                  />
+                </figure>
+                <h2 className="product__title">{product.name}</h2>
+                <p className="product__text" role="definition">
+                  {product.description}
+                </p>
+                <span className="product__price" role="textbox">
+                  {product.price.toFixed(3)}
+                </span>
+              </article>
+              <button className="button button--hover">ADD</button>
             </li>
           ))
         ) : (
