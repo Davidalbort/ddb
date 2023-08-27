@@ -16,7 +16,7 @@ export function Products({ products }: ProductsProps) {
               />
               <h2>{product.name}</h2>
               <p role="definition">{product.description}</p>
-              <span role="textbox">{product.price}</span>
+              <span role="textbox">{product.price.toFixed(3)}</span>
               <button>ADD</button>
             </li>
           ))

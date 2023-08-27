@@ -1,16 +1,14 @@
-import {
-  FilterModalProps,
-  FilterModalState,
-  HandleChangeCheckboxProps,
-} from '@/utils/types'
-import { useState } from 'react'
+import { useFilter } from '@/hooks/useFilter'
+import { FilterModalProps, HandleChangeCheckboxProps } from '@/utils/types'
 
 export function FilterModal({
   listOptions,
-  toggleModalFilter,
+  handleFilter,
+  resetProduct,
 }: FilterModalProps) {
-  const [optionsSelected, setOptionsSelected] = useState<number[]>([])
-  const isThereOptions = optionsSelected.length > 0 ? false : true
+  const { optionsSelected, updateOptions, resetOptions, closeModalFilter } =
+    useFilter()
+  const isThereOptions = optionsSelected?.length > 0 ? false : true
   const labelButtonFilter = `FILTRAR POR ${optionsSelected.join(',')}`
   const handleChangeCheckbox = ({ type }: HandleChangeCheckboxProps) => {
     const isSelectedType = optionsSelected.includes(type)
@@ -18,11 +16,16 @@ export function FilterModal({
       const currentOptionsSelected = optionsSelected.filter(
         (option) => option !== type,
       )
-      setOptionsSelected(currentOptionsSelected)
+      updateOptions(currentOptionsSelected)
     } else {
       const currentOptionsSelected = [...optionsSelected, type]
-      setOptionsSelected(currentOptionsSelected)
+      updateOptions(currentOptionsSelected)
     }
+  }
+  const handleReset = () => {
+    resetOptions()
+    closeModalFilter()
+    resetProduct()
   }
   return (
     <section>
@@ -31,13 +34,16 @@ export function FilterModal({
         <label key={option.id}>
           <input
             type="checkbox"
+            checked={optionsSelected.includes(option.id)}
             onChange={() => handleChangeCheckbox({ type: option.id })}
           />
           {option.label}
         </label>
       ))}
-      <button onClick={toggleModalFilter}>{labelButtonFilter}</button>
-      <button disabled={isThereOptions}>LIMPIAR</button>
+      <button onClick={handleFilter}>{labelButtonFilter}</button>
+      <button onClick={handleReset} disabled={isThereOptions}>
+        LIMPIAR
+      </button>
       <span>{optionsSelected.join(',')}</span>
     </section>
   )

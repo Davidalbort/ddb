@@ -1,9 +1,15 @@
 import { render, screen } from '@testing-library/react'
 import { fireEvent } from '@testing-library/react'
 import { AppUi } from './AppUi'
+import { FilterProvider } from '@/context/FilterContext'
+
 describe('<AppUi />', () => {
   test('Should display button filter and when click open modal filter', async () => {
-    render(<AppUi />)
+    render(
+      <FilterProvider>
+        <AppUi />
+      </FilterProvider>,
+    )
     const buttonFilter = screen.getByRole('button', { name: 'FILTRAR' })
     expect(buttonFilter).toBeInTheDocument()
     await fireEvent.click(buttonFilter)
@@ -11,7 +17,11 @@ describe('<AppUi />', () => {
     expect(titleModalFilter).toBeInTheDocument()
   })
   test('Should display options to filter and buttons clean and filter', async () => {
-    render(<AppUi />)
+    render(
+      <FilterProvider>
+        <AppUi />
+      </FilterProvider>,
+    )
     const buttonFilterMain = screen.getByRole('button', { name: 'FILTRAR' })
     expect(buttonFilterMain).toBeInTheDocument()
     await fireEvent.click(buttonFilterMain)
@@ -25,7 +35,11 @@ describe('<AppUi />', () => {
     expect(buttonClean).toBeInTheDocument()
   })
   test('Should validate when click in a checkbox is selected and enable button filter', async () => {
-    render(<AppUi />)
+    render(
+      <FilterProvider>
+        <AppUi />
+      </FilterProvider>,
+    )
     const buttonFilterMain = screen.getByRole('button', { name: 'FILTRAR' })
     expect(buttonFilterMain).toBeInTheDocument()
     await fireEvent.click(buttonFilterMain)
@@ -46,8 +60,12 @@ describe('<AppUi />', () => {
     await fireEvent.click(Red)
     expect(Red).toBeChecked()
   })
-  test('Should close modal filter when clicked button filter by and display products by those filter', async () => {
-    render(<AppUi />)
+  test('Should close modal filter when is clicked button filter by and display products by those filter', async () => {
+    render(
+      <FilterProvider>
+        <AppUi />
+      </FilterProvider>,
+    )
     const buttonFilterMain = screen.getByRole('button', { name: 'FILTRAR' })
     expect(buttonFilterMain).toBeInTheDocument()
     await fireEvent.click(buttonFilterMain)
@@ -60,7 +78,28 @@ describe('<AppUi />', () => {
     const buttonFilterModal = screen.getByText('FILTRAR POR 1')
     await fireEvent.click(buttonFilterModal)
     expect(titleModalFilter).not.toBeInTheDocument()
-    // const productsType1 = screen.getAllByRole('listitem')
-    // expect(productsType1).toHaveLength(4)
+    const productsType1 = screen.getAllByRole('listitem')
+    expect(productsType1).toHaveLength(4)
+  })
+  test('Should close modal when is clicked button clean and display all products', async () => {
+    render(
+      <FilterProvider>
+        <AppUi />
+      </FilterProvider>,
+    )
+    const buttonFilterMain = screen.getByRole('button', { name: 'FILTRAR' })
+    expect(buttonFilterMain).toBeInTheDocument()
+    await fireEvent.click(buttonFilterMain)
+    const titleModalFilter = screen.getByRole('heading', { name: 'Filtros' })
+    expect(titleModalFilter).toBeInTheDocument()
+    const options = screen.getAllByRole('checkbox')
+    expect(options).toHaveLength(3)
+    const [Yellow] = options
+    await fireEvent.click(Yellow)
+    const buttonClean = screen.getByText('LIMPIAR')
+    await fireEvent.click(buttonClean)
+    expect(titleModalFilter).not.toBeInTheDocument()
+    const allProducts = screen.getAllByRole('listitem')
+    expect(allProducts).toHaveLength(10)
   })
 })

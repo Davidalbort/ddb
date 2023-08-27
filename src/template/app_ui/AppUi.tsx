@@ -4,28 +4,41 @@ import result from '@/../db.json'
 import { Filter } from '@/components/icons/Icons'
 import { useState } from 'react'
 import { FilterModal } from '@/components/filterModal/FilterModal'
+import { useFilter } from '@/hooks/useFilter'
+import { Product } from '@/utils/types'
+import { options } from '@/utils/constants'
 
 export function AppUi() {
-  const [isOpenModalFilter, setIsOpenModalFilter] = useState(false)
-  const handleClickModalFilter = () => {
-    setIsOpenModalFilter((previousState) => !previousState)
+  const [filteredProducts, setFilteredProducts] = useState<Product[]>(
+    result.products,
+  )
+  const {
+    filterProducts,
+    isOpenModalFilter,
+    openModalFilter,
+    closeModalFilter,
+  } = useFilter()
+  const handleFilter = () => {
+    closeModalFilter()
+    const newFilteredProducts = filterProducts(result.products)
+    setFilteredProducts(newFilteredProducts)
   }
-  const options = [
-    { id: 1, label: 'Rubia' },
-    { id: 2, label: 'Morena' },
-    { id: 3, label: 'Roja' },
-  ]
+  const resetProduct = () => {
+    setFilteredProducts(result.products)
+  }
   return (
     <div>
-      <Products products={result.products} />
-      <button onClick={handleClickModalFilter}>
+      <h1>Cervezas</h1>
+      <Products products={filteredProducts} />
+      <button onClick={openModalFilter}>
         <span>FILTRAR</span>
         <Filter />
       </button>
       {isOpenModalFilter ? (
         <FilterModal
           listOptions={options}
-          toggleModalFilter={handleClickModalFilter}
+          handleFilter={handleFilter}
+          resetProduct={resetProduct}
         />
       ) : null}
     </div>

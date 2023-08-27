@@ -17,7 +17,8 @@ export interface FilterOptions {
 }
 export interface FilterModalProps {
   listOptions: FilterOptions[]
-  toggleModalFilter: () => void
+  handleFilter: () => void
+  resetProduct: () => void
 }
 
 export interface FilterModalState {
