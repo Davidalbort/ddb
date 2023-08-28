@@ -1,15 +1,21 @@
 import { useFilter } from '@/hooks/useFilter'
 import { FilterModalProps, HandleChangeCheckboxProps } from '@/utils/types'
+import '@/styles/components/filter_modal.scss'
+import { Filter } from '../icons/Icons'
 
 export function FilterModal({
   listOptions,
   handleFilter,
   resetProduct,
 }: FilterModalProps) {
-  const { optionsSelected, updateOptions, resetOptions, closeModalFilter } =
-    useFilter()
+  const {
+    optionsSelected,
+    updateOptions,
+    resetOptions,
+    closeModalFilter,
+    isOpenModalFilter,
+  } = useFilter()
   const isThereOptions = optionsSelected?.length > 0 ? false : true
-  const labelButtonFilter = `FILTRAR POR ${optionsSelected.join(',')}`
   const handleChangeCheckbox = ({ type }: HandleChangeCheckboxProps) => {
     const isSelectedType = optionsSelected.includes(type)
     if (isSelectedType) {
@@ -27,24 +33,54 @@ export function FilterModal({
     closeModalFilter()
     resetProduct()
   }
+  const classNameModal = isOpenModalFilter ? 'modal modal--active' : 'modal'
+  const classNameButtonClear = !isThereOptions
+    ? 'modal__button modal__button--active'
+    : 'modal__button modal__button--clear'
   return (
-    <section>
-      <h2>Filtros</h2>
-      {listOptions.map((option) => (
-        <label key={option.id}>
-          <input
-            type="checkbox"
-            checked={optionsSelected.includes(option.id)}
-            onChange={() => handleChangeCheckbox({ type: option.id })}
-          />
-          {option.label}
-        </label>
-      ))}
-      <button onClick={handleFilter}>{labelButtonFilter}</button>
-      <button onClick={handleReset} disabled={isThereOptions}>
-        LIMPIAR
-      </button>
-      <span>{optionsSelected.join(',')}</span>
-    </section>
+    <div className={classNameModal}>
+      <section className="modal__content">
+        <h2 className="modal__title">Filtros</h2>
+        <fieldset className="input">
+          {listOptions.map((option) => (
+            <label className="input__label" key={option.id}>
+              {option.label}
+              <input
+                className="input__checkbox"
+                type="checkbox"
+                checked={optionsSelected.includes(option.id)}
+                onChange={() => handleChangeCheckbox({ type: option.id })}
+              />
+            </label>
+          ))}
+        </fieldset>
+        <footer className="modal__footer">
+          <button
+            className={classNameButtonClear}
+            onClick={handleReset}
+            disabled={isThereOptions}
+          >
+            LIMPIAR
+          </button>
+          <button
+            className="modal__button modal__button--filter"
+            onClick={handleFilter}
+          >
+            <div className="modal__button-container">
+              <span>FILTRE</span>
+              {!isThereOptions && (
+                <span className="modal__filter">
+                  {optionsSelected.join(',')}
+                </span>
+              )}
+              <Filter />
+            </div>
+          </button>
+        </footer>
+        <button className="modal__close" onClick={closeModalFilter}>
+          X
+        </button>
+      </section>
+    </div>
   )
 }

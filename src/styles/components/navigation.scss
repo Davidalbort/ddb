@@ -1,0 +1,25 @@
+@use '../abstracts/colors';
+@use '../utils/mixins';
+.navigation {
+  height: 70px;
+  background-color: colors.$titles-primary;
+  @include mixins.justify(center, row);
+  color: colors.$white-primary;
+  padding: 0 12px;
+}
+
+.navigation__icon {
+  width: 80px;
+  @include mixins.justify(center, row);
+}
+
+.navigation__cart {
+  position: absolute;
+  background-color: colors.$blue-primary;
+  width: 18px;
+  height: 18px;
+  border-radius: 7px;
+  @include mixins.justify(center, column, center);
+  top: 10px;
+  right: 10px;
+}

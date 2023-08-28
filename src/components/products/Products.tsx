@@ -27,7 +27,7 @@ export function Products({ products }: ProductsProps) {
                   {product.price.toFixed(3)}
                 </span>
               </article>
-              <button className="button button--hover">ADD</button>
+              <button className="button button--hover">AGREGAR</button>
             </li>
           ))
         ) : (
