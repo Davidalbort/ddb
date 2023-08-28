@@ -1,34 +1,45 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+[![Deploy Next.js site to Pages](https://github.com/Davidalbort/ddb/actions/workflows/nextjs.yml/badge.svg)](https://github.com/Davidalbort/ddb/actions/workflows/nextjs.yml)
+# `Introduction`
 
-## Getting Started
+  * This project was created with next js with typescript, style with scss component formatting, was developed with TDD for achieve all requirements of challenge, and lastly made style keeping in mind mobile first without use of media queries. 
 
-First, run the development server:
+
+# `Development process`
+
+* Read and analyze documentation (challenge)
+* Make json with information of demo on Figma.
+* Develop all app with TDD for ensure all requirements of the app.
+* Creating components, and home pages to structure the application with semantic HTML, all taking into account the Atomic Design methodology.
+* Create filter context for we can use in all the app, ensure that there wasn't props drill.
+* Make all style of the app with methodology responsive design with mobil first and with methodology BEM to name of all classes.
+* Necessary tags were added to have a good SEO performance.
+* Documentation of the whole process.
+
+
+
+Available Scripts
+
+* In the project directory, you can run:
+
+ ## `Getting Started`
+
+* First type on terminal
+
+```bash
+npm i
+```
+
+* Second, run the development server:
 
 ```bash
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## `Running tests`
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+* Run `npm run test:watch` .
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
