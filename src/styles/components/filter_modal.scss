@@ -1,0 +1,88 @@
+@use '../abstracts/colors';
+@use '../utils/mixins';
+@use '../abstracts/font_size';
+.modal {
+  position: fixed;
+  bottom: -100vh; /* Empieza fuera de la vista */
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  transition: bottom 0.3s ease-in-out; /* Añade una transición suave */
+  display: flex;
+  justify-content: center;
+  &--active {
+    bottom: 0;
+  }
+}
+
+.modal__content {
+  position: inherit;
+  width: clamp(375px, 2vw, 600px);
+  height: 284px;
+  background-color: colors.$white-primary;
+  bottom: 0;
+}
+
+.modal__title {
+  margin: 12px 0;
+  padding: 0 12px;
+}
+
+.input {
+  @include mixins.justify(stretch);
+  border: none;
+}
+.input__label {
+  @include mixins.justify(center, row);
+  border-top: 1px solid colors.$gray-border;
+  border-bottom: 1px solid colors.$gray-border;
+  padding: 12px 0;
+}
+
+.modal__footer {
+  background-color: colors.$gray-background;
+  height: 54px;
+  @include mixins.justify(center, row, space-around);
+}
+
+.modal__button {
+  width: 165px;
+  height: 40px;
+  font-size: clamp(font_size.$sub-title-s, 2vw, font_size.$sub-title-l);
+  font-weight: 700;
+  line-height: 20px;
+  align-items: center;
+  &--filter {
+    color: colors.$white-primary;
+    background-color: colors.$blue-primary;
+  }
+  &--clear {
+    color: colors.$gray-primary;
+  }
+  &--active {
+    color: colors.$titles-primary;
+  }
+}
+
+.modal__button-container {
+  height: 40px;
+  @include mixins.justify(center, row, space-evenly);
+}
+
+.modal__filter {
+  background-color: colors.$white-primary;
+  color: colors.$titles-primary;
+  border-radius: 4px;
+}
+
+.modal__close {
+  color: colors.$titles-primary;
+  background-color: colors.$white-primary;
+  border: 1px solid colors.$gray-border;
+  border-radius: 4px;
+  position: absolute;
+  top: -18px;
+  right: 5px;
+  width: 40px;
+  height: 40px;
+}

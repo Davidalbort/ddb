@@ -28,13 +28,13 @@ describe('<AppUi />', () => {
     const options = screen.getAllByRole('checkbox')
     expect(options).toHaveLength(3)
     const buttonFilterModal = screen.getByRole('button', {
-      name: 'FILTRAR POR',
+      name: 'FILTRE',
     })
     const buttonClean = screen.getByRole('button', { name: 'LIMPIAR' })
     expect(buttonFilterModal).toBeInTheDocument()
     expect(buttonClean).toBeInTheDocument()
   })
-  test('Should validate when click in a checkbox is selected and enable button filter', async () => {
+  test('Should validate when click in a checkbox is selected and enable button clear', async () => {
     render(
       <FilterProvider>
         <AppUi />
@@ -49,11 +49,11 @@ describe('<AppUi />', () => {
     const buttonClean = screen.getByRole('button', {
       name: 'LIMPIAR',
     })
-    const buttonFilterModal = screen.getByText('FILTRAR POR')
     expect(buttonClean).not.toBeEnabled()
     await fireEvent.click(Yellow)
     expect(buttonClean).toBeEnabled()
-    expect(buttonFilterModal).toHaveTextContent('FILTRAR POR 1')
+    const buttonFilterModal = screen.getByText('1')
+    expect(buttonFilterModal).toBeInTheDocument()
     expect(Yellow).toBeChecked()
     await fireEvent.click(Brown)
     expect(Brown).toBeChecked()
@@ -75,7 +75,7 @@ describe('<AppUi />', () => {
     expect(options).toHaveLength(3)
     const [Yellow] = options
     await fireEvent.click(Yellow)
-    const buttonFilterModal = screen.getByText('FILTRAR POR 1')
+    const buttonFilterModal = screen.getByText('1')
     await fireEvent.click(buttonFilterModal)
     expect(titleModalFilter).not.toBeInTheDocument()
     const productsType1 = screen.getAllByRole('listitem')

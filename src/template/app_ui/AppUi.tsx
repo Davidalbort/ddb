@@ -1,12 +1,14 @@
 'use client'
 import { Products } from '@/components/products/Products'
 import result from '@/../db.json'
-import { Filter } from '@/components/icons/Icons'
 import { useState } from 'react'
 import { FilterModal } from '@/components/filterModal/FilterModal'
 import { useFilter } from '@/hooks/useFilter'
 import { Product } from '@/utils/types'
 import { options } from '@/utils/constants'
+import { ButtonModal } from '@/components/buttonModal/ButtonModal'
+import '@/styles/template/app_ui.scss'
+import { Navigation } from '@/components/navigation/Navigation'
 
 export function AppUi() {
   const [filteredProducts, setFilteredProducts] = useState<Product[]>(
@@ -27,13 +29,11 @@ export function AppUi() {
     setFilteredProducts(result.products)
   }
   return (
-    <div>
+    <div className="app-ui">
+      <Navigation />
       <h1>Cervezas</h1>
       <Products products={filteredProducts} />
-      <button onClick={openModalFilter}>
-        <span>FILTRAR</span>
-        <Filter />
-      </button>
+      <ButtonModal text="FILTRAR" handleClick={openModalFilter} />
       {isOpenModalFilter ? (
         <FilterModal
           listOptions={options}

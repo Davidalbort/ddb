@@ -1,6 +1,10 @@
-@mixin justify($vertical-align: center) {
+@mixin justify(
+  $vertical-align: center,
+  $flex: column,
+  $justify: space-between
+) {
   display: flex;
-  flex-flow: column wrap;
+  flex-flow: $flex wrap;
   align-items: $vertical-align;
-  justify-content: space-between;
+  justify-content: $justify;
 }

@@ -1,0 +1,18 @@
+@use '../abstracts/font_size';
+@use '../abstracts/colors';
+@use '../utils/mixins';
+.button-modal {
+  font-size: clamp(font_size.$sub-title-s, 2vw, font_size.$sub-title-l);
+  font-weight: 700;
+  line-height: 20px;
+  color: colors.$white-primary;
+  background-color: colors.$blue-primary;
+  max-width: 400px;
+  position: sticky;
+  bottom: 12px;
+  margin: auto;
+}
+
+.button-modal__container {
+  @include mixins.justify(center, row);
+}

@@ -1,0 +1,7 @@
+@use '../utils/mixins';
+.app-ui {
+  @include mixins.justify(stretch);
+  & > h1 {
+    margin: auto;
+  }
+}

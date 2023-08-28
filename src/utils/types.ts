@@ -28,3 +28,8 @@ export interface FilterModalState {
 export interface HandleChangeCheckboxProps {
   type: number
 }
+
+export interface ButtonModalProps {
+  handleClick: () => void
+  text: string
+}

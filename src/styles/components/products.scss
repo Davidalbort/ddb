@@ -4,8 +4,8 @@
 @use '../abstracts/colors';
 @use '../utils/variables';
 .product {
+  width: clamp(375px, 84vw, 850px);
   margin: auto;
-  max-width: 850px;
 }
 .product__list {
   padding: 12px;
