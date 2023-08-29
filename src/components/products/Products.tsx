@@ -1,6 +1,7 @@
 import { ProductsProps } from '@/utils/types'
 import Image from 'next/image'
 import '@/styles/components/products.scss'
+import { BASE_PATH } from '@/utils/constants'
 
 export function Products({ products }: ProductsProps) {
   return (
@@ -13,7 +14,7 @@ export function Products({ products }: ProductsProps) {
                 <figure className="container-image">
                   <Image
                     className="product__image product__image--zoom"
-                    src={product.image}
+                    src={`${BASE_PATH}${product.image}`}
                     alt={`Image ${product.name}`}
                     width={150}
                     height={200}
