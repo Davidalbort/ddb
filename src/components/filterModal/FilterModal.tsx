@@ -34,12 +34,15 @@ export function FilterModal({
     resetProduct()
   }
   const classNameModal = isOpenModalFilter ? 'modal modal--active' : 'modal'
+  const classNameModal_content = isOpenModalFilter
+    ? 'modal__content modal__content--active'
+    : 'modal__content'
   const classNameButtonClear = !isThereOptions
     ? 'modal__button modal__button--active'
     : 'modal__button modal__button--clear'
   return (
     <div className={classNameModal}>
-      <section className="modal__content">
+      <section className={classNameModal_content}>
         <h2 className="modal__title">Filtros</h2>
         <fieldset className="input">
           {listOptions.map((option) => (

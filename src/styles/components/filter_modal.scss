@@ -3,14 +3,33 @@
 @use '../abstracts/font_size';
 .modal {
   position: fixed;
-  bottom: -100vh; /* Empieza fuera de la vista */
+  opacity: 0; /* Empieza fuera de la vista */
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-  transition: bottom 0.3s ease-in-out; /* Añade una transición suave */
+  animation: modal 0.3s ease-in-out; /* Añade una transición suave */
   display: flex;
   justify-content: center;
+
   &--active {
+    opacity: 1;
+  }
+}
+
+@keyframes modal {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes content-modal {
+  from {
+    bottom: -100vh;
+  }
+  to {
     bottom: 0;
   }
 }
@@ -20,7 +39,12 @@
   width: clamp(375px, 2vw, 600px);
   height: 284px;
   background-color: colors.$white-primary;
-  bottom: 0;
+  bottom: -100vh;
+  animation: content-modal 0.3s ease-in-out; /* Añade una transición suave */
+
+  &--active {
+    bottom: 0;
+  }
 }
 
 .modal__title {
